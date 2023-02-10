@@ -11,5 +11,6 @@ public class CakeModel {
         numCandles = 2;
         hasFrosting = true;
         hasCandles = true;
+        candlesOn = true;
     }
 }
