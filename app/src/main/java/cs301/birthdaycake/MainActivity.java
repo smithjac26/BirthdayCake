@@ -18,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         CakeController CakeControlling = new CakeController((CakeView)findViewById(R.id.cakeview));
 
+        CakeView cakeWatching = findViewById(R.id.cakeview);
+        CakeController cakeControlling = new CakeController(cakeWatching);
+        cakeWatching.setOnTouchListener(cakeControlling);
+
+
         Button blowOut = findViewById(R.id.BlowOut);
         blowOut.setOnClickListener(CakeControlling);
 
