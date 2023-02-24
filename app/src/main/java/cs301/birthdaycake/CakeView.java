@@ -20,6 +20,9 @@ public class CakeView extends SurfaceView {
     Paint wickPaint = new Paint();
     Paint boxPaintRed = new Paint();
     Paint boxPaintGreen = new Paint();
+    Paint ballonpaint = new Paint();
+    Paint stringcolor = new Paint();
+    Paint locationpaint = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -67,6 +70,9 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        ballonpaint.setColor(Color.BLUE);
+        stringcolor.setColor(Color.BLACK);
+        locationpaint.setColor(Color.RED);
         boxPaintRed.setColor(Color.RED);
         boxPaintGreen.setColor(Color.GREEN);
 
@@ -104,8 +110,6 @@ public class CakeView extends SurfaceView {
             canvas.drawRect(wickLeft, wickTop, wickLeft + wickWidth, wickTop + wickHeight, wickPaint);
         }
 
-
-
     }
 
     /**
@@ -116,8 +120,7 @@ public class CakeView extends SurfaceView {
      * This method will draw a birthday cake
      */
     @Override
-    public void onDraw(Canvas canvas)
-    {
+    public void onDraw(Canvas canvas) {
         //top and bottom are used to keep a running tally as we progress down the cake layers
         float top = cakeTop;
         float bottom = cakeTop + frostHeight;
@@ -142,18 +145,25 @@ public class CakeView extends SurfaceView {
 
         //Now a candle in the center
         int numCandles = CakeGoodLooking.numCandles;
-        float spacing = cakeWidth/(numCandles + 1);
-        for(int i = 1; i <= numCandles; i++) {
+        float spacing = cakeWidth / (numCandles + 1);
+        for (int i = 1; i <= numCandles; i++) {
             drawCandle(canvas, cakeLeft + spacing * i, cakeTop);
         }
 
+        if (CakeGoodLooking.xCoord > 0) {
+            locationpaint.setTextSize(50);
+            canvas.drawText("(" + CakeGoodLooking.xCoord + ", " + CakeGoodLooking.yCoord + ")", 10, 75, locationpaint);
+
+            canvas.drawOval(CakeGoodLooking.xCoord - 100, CakeGoodLooking.yCoord - 120, CakeGoodLooking.xCoord + 100, CakeGoodLooking.yCoord + 100, ballonpaint);
+            canvas.drawLine(CakeGoodLooking.xCoord + 0, CakeGoodLooking.yCoord + 0, CakeGoodLooking.xCoord + 10, CakeGoodLooking.yCoord + 200, stringcolor);
+            canvas.drawRect(CakeGoodLooking.xCoord - 30, CakeGoodLooking.yCoord - 30, CakeGoodLooking.xCoord + 30, CakeGoodLooking.yCoord + 30, boxPaintGreen);
+            canvas.drawRect(CakeGoodLooking.xCoord + 30, CakeGoodLooking.yCoord - 30, CakeGoodLooking.xCoord + 90, CakeGoodLooking.yCoord + 30, boxPaintRed);
+            canvas.drawRect(CakeGoodLooking.xCoord - 30, CakeGoodLooking.yCoord + 30, CakeGoodLooking.xCoord + 30, CakeGoodLooking.yCoord + 90, boxPaintRed);
+            canvas.drawRect(CakeGoodLooking.xCoord + 30, CakeGoodLooking.yCoord + 30, CakeGoodLooking.xCoord + 90, CakeGoodLooking.yCoord + 90, boxPaintGreen);
+        }
 
 
-        canvas.drawRect(CakeGoodLooking.xCoord - 30, CakeGoodLooking.yCoord - 30,CakeGoodLooking.xCoord + 30, CakeGoodLooking.yCoord + 30, boxPaintGreen );
-        canvas.drawRect(CakeGoodLooking.xCoord + 30, CakeGoodLooking.yCoord - 30,CakeGoodLooking.xCoord + 90, CakeGoodLooking.yCoord + 30, boxPaintRed );
-        canvas.drawRect(CakeGoodLooking.xCoord - 30, CakeGoodLooking.yCoord + 30,CakeGoodLooking.xCoord + 30, CakeGoodLooking.yCoord + 90, boxPaintRed );
-        canvas.drawRect(CakeGoodLooking.xCoord + 30, CakeGoodLooking.yCoord + 30,CakeGoodLooking.xCoord + 90, CakeGoodLooking.yCoord + 90, boxPaintGreen );
-    }//onDraw
+    }
 
 }//class CakeView
 

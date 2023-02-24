@@ -14,5 +14,7 @@ public class CakeModel {
         hasFrosting = true;
         hasCandles = true;
         candlesOn = true;
+        yCoord = -1;
+        xCoord = -1;
     }
 }
